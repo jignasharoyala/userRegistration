@@ -24,7 +24,6 @@ urlpatterns = [
     url(r'^$',views.index,name='index'),
     url(r'^special/',views.special,name='special'),
     url(r'',include('userRegistrationApp.urls')),
-    url(r'^logout/$', views.user_logout, name='logout'),
-
+    path('logout/', views.logout, name='logout'),
     path('admin/', admin.site.urls),
 ]

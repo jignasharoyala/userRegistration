@@ -1,9 +1,72 @@
-{% extends "userRegistrationApp/base.html" %}
-{% block body_block %}<div class="container">
+<!-- {% extends "userRegistrationApp/base.html" %}
+ -->{% block body_block %}<div class="container">
   <div class="jumbotron">
-    <h1>Welcome to the Djungle !</h1>
-    {% if user.is_authenticated %}
-        <h2>Hello {{ user.username }}</h2>
+    
+    {% if user %}
+    	{% for record in user %}
+         <div class="container">
+		          <div class="row">
+		            <div class="col-xs-12 text-center bg-primary" style="height:10%;">
+		            	
+		            	<h2>Welcome - {{ record.user_name }}</h2> 
+		            </div>
+		          </div>
+		          <div class="row">
+		            <div class="col-xs-3" style="height:40%; border:1px solid black;">
+		            	<form  action="/set_primary_email/" method="post">
+                        {% csrf_token %}
+                        {{ form }}
+                        	<input type="hidden" name="user_id" value="{{ record.user_id }}">
+				            <h5>Set any email id as primary </h5>
+					       	<label> {{ record.user_email1 }} </label>
+					       	<input type="radio" name="user_email"><br>
+
+					       	<label> {{ record.user_email2 }} </label>
+					       	<input type="radio" name="user_email" value=" {{ record.user_email2 }}"><br>
+					       	<input type="submit" name="submit" value="submit" class=" effect-2-btn">
+					</form>
+
+		            </div>
+		            <div class="col-xs-3" style="height:40%; border:1px solid black;">
+		            	<form  action="/upload_file/" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form }}
+                        	<input type="hidden" name="user_id" value="{{ record.user_id }}">
+			            	<label><i class="fa fa-file-pdf-o" aria-hidden="true"> Upload your file</i>
+			            	<input class="file-upload" type="file" name="user_file" id="user_file" placeholder="File" required>
+			            	</label>
+			            	<input type="submit" name="submit" value="submit" class=" effect-2-btn">
+			            </form>
+		            </div>
+		            <div class="col-xs-6" style="height:40%; border:1px solid black;">
+		            	<div>
+		            		<form  action="/replay_to_comment/" method="post">
+                                {% csrf_token %}
+                                {{ form }}
+					            	<input type="hidden" name="user_id" value="{{ record.user_id }}">
+					            	<label>Admin comment : </label>
+					            	<textarea readonly rows="4" cols="50">
+					            		{{ record.addmin_comment }}
+					            	</textarea>
+					            </div>
+					            	<div>
+					            	<label>Your replay: </label>
+
+					            	<textarea rows="4" cols="50" name="user_replay" value="{{ record.user_replay }}"></textarea>
+					            </div>
+
+				            	<input type="submit" name="submit" value="Send" class=" effect-2-btn">
+
+				            </form>
+		            </div>
+
+
+		          </div>
+		        </div>
+
+                
+
+        {% endfor %}
     {% else %}
         <h2>Register or Login if you'd like to</h2>
     {% endif %}

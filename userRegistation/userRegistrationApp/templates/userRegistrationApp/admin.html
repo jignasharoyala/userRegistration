@@ -38,11 +38,10 @@
                             <th>Name</th>
                             <th>Email1</th>
                             <th>Email2</th>
-                            <th>Document</th>
-                            
+                            <th>Document</th> 
                             <th >Note</th>
                             <th >Replay</th>
-                            
+                            <th></th>
                            
                         </tr>
                     </thead>
@@ -53,13 +52,13 @@
                                     <form  action="/adminView/adminAddNote/" method="post">
                                 {% csrf_token %}
                                 {{ form }}
-                                    <td>{{ userRegDatas.username }}</td>
+                                    <td>{{ userRegDatas.user_name }}</td>
                                     <td>{{ userRegDatas.user_email1 }}</td>
                                     <td>{{ userRegDatas.user_email2 }}</td>
                                 
                                     <td>
                                       
-                                        <a href="{% static 'userRegistrationApp/'%}{{ userRegDatas.resumefile }}" target="_blank"> pdf</a>
+                                        <a href="{% static 'userRegistrationApp/'%}{{ userRegDatas.user_file }}" target="_blank"> file</a>
 
                                     </td>
                                   
@@ -67,7 +66,7 @@
                                     <td>{{ userRegDatas.user_replay }}</td>
                                    
 
-                                    <input type="hidden" id="username" name="username" value="{{ userRegDatas.username }}">    
+                                    <input type="hidden" id="user_id" name="user_id" value="{{ userRegDatas.user_id }}">    
                                     <td><input type="submit" name="submit" value="Add note" class=" effect-2-btn"></td>
                                     </form>
                                 </tr>                
