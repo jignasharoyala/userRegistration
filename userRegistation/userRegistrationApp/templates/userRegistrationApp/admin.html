@@ -26,26 +26,6 @@
         </div>
     </section>
 
-    <section class="contact-form-new">
-        <div class="container">
-            <div class="row">                 
-             <form  action="{% url 'search' %}" method="get">
-                {% csrf_token %}
-                {{ form }}
-                <div class="">
-                   
-                    <div class="form-group">
-                        
-                        <i class="fa fa-search"></i>
-                        <input type="text" placeholder="Search" name="search_input" id="search">
-                        <button type="submit" class="submit">Search</button>
-                        
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    </section>
     <section class="contact-form-new"></section>
     <section class="contact-form-new">
         <div class="container">
@@ -56,16 +36,13 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>phone</th>
-                            <th>Birthdate</th>
-                            <th>City</th>
-                            <th>Interested In</th>
-                            <th>Photo</th>
-                            <th>Resume</th>
-                            <th>Work Experience</th>
-                            <th>Reg Date</th>
-                            <th colspan="2">Note</th>
+                            <th>Email1</th>
+                            <th>Email2</th>
+                            <th>Document</th>
+                            
+                            <th >Note</th>
+                            <th >Replay</th>
+                            
                            
                         </tr>
                     </thead>
@@ -76,28 +53,21 @@
                                     <form  action="/adminView/adminAddNote/" method="post">
                                 {% csrf_token %}
                                 {{ form }}
-                                    <td>{{ userRegDatas.user_name }}</td>
-                                    <td>{{ userRegDatas.user_email }}</td>
-                                    <td>{{ userRegDatas.user_phone }}</td>
-                                    <td>{{ userRegDatas.user_bdate }}</td>
-                                    <td>{{ userRegDatas.user_city }}</td>
-                                    <td>{{ userRegDatas.user_interested_in }}</td>
-                                    <td> 
-                                                                   
-                                        <img src= "{% static 'userRegistrationApp/'%}{{ userRegDatas.user_image }}" alt="image not found" width="100" height="100"> </td>
+                                    <td>{{ userRegDatas.username }}</td>
+                                    <td>{{ userRegDatas.user_email1 }}</td>
+                                    <td>{{ userRegDatas.user_email2 }}</td>
+                                
                                     <td>
                                       
                                         <a href="{% static 'userRegistrationApp/'%}{{ userRegDatas.resumefile }}" target="_blank"> pdf</a>
 
                                     </td>
-
-                                    <td>{{ userRegDatas.user_experience }}</td>
-
+                                  
+                                    <td><input type="textarea" name="addmin_comment" value="{{ userRegDatas.addmin_comment }}"></td>
+                                    <td>{{ userRegDatas.user_replay }}</td>
                                    
-                                    <td>{{ userRegDatas.register_date }}</td>
 
-                                    <input type="hidden" id="register_id" name="register_id" value="{{ userRegDatas.register_id }}">    
-                                    <td><input type="textarea" name="addmin_note" value="{{ userRegDatas.addmin_note }}"></td>
+                                    <input type="hidden" id="username" name="username" value="{{ userRegDatas.username }}">    
                                     <td><input type="submit" name="submit" value="Add note" class=" effect-2-btn"></td>
                                     </form>
                                 </tr>                

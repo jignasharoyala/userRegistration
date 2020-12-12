@@ -9,8 +9,10 @@ from userRegistrationApp import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-  
-  	url(r'^register/$',views.register,name='register'),
-    url(r'^user_login/$',views.user_login,name='user_login'),
+  	path('adminView/', views.adminView, name='adminView'),
+    path('adminView/adminAddNote/', views.adminAddNote, name='adminAddNote'),
+  	path(r'^register/$',views.register,name='register'),
+    path(r'^user_login/$',views.user_login,name='user_login'),
+
 
 ]

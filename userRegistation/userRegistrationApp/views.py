@@ -4,8 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-
-
+from userRegistrationApp.models import UserProfileDetails
+from django.contrib.auth.models import User
 def index(request):
     return render(request,'userRegistrationApp/index.html')
 
@@ -69,3 +69,17 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
+
+
+def adminView(request):
+    if request.method == 'GET':       
+        userRegData = User.objects.all()   
+        print(userRegData)         
+        return render(request, 'userRegistrationApp/admin.html', {'userRegData': userRegData })
+
+
+def adminAddNote(request):
+    if request.method == 'POST':
+        UserProfileDetails.objects.filter(username=request.POST['username']).update(addmin_comment=request.POST['addmin_comment'])
+        userRegData = UserProfileDetails.objects.all()
+        return redirect('adminView')
